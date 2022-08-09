@@ -29,7 +29,7 @@ func (r *productRepository) GetAllProduct() []model.ProductResponse{
 	var products []model.ProductResponse
 	for rows.Next(){
 		var p model.ProductResponse
-		rows.Scan(&p.ID, &p.Foto, &p.Deskripsi, &p.Url)
+		rows.Scan(&p.ID, &p.NamaBarang, &p.Foto, &p.Harga, &p.Url)
 
 		products = append(products, p)
 	}
@@ -38,7 +38,7 @@ func (r *productRepository) GetAllProduct() []model.ProductResponse{
 }
 
 func (r *productRepository) AddProduct(p model.ProductRequest) {
-	r.db.Query("INSERT INTO product (foto, url, deskripsi) VALUES (?, ?, ?)",p.Foto, p.Url, p.Deskripsi)
+	r.db.Query("INSERT INTO product (nama_barang, foto, url, harga) VALUES (?, ?, ?)",p.NamaBarang, p.Foto, p.Url, p.Harga)
 }
 
 func (r *productRepository) DeleteProduct(id int){
@@ -49,11 +49,11 @@ func (r *productRepository) FindProduct(id int) model.ProductResponse{
 	var p model.ProductResponse
 	row := r.db.QueryRow("SELECT * FROM product WHERE id = ?", id)
 	
-	row.Scan(&p.ID, &p.Foto, &p.Deskripsi, &p.Url)
+	row.Scan(&p.ID, &p.NamaBarang, &p.Foto, &p.Harga, &p.Url)
 
 	return p
 }
 
 func (r *productRepository) UpdateProduct(p model.ProductRequest, id int) {
-	r.db.Query("UPDATE product SET foto = ?, deskripsi = ?, url = ? WHERE id = ?",p.Foto, p.Deskripsi, p.Url, id)
+	r.db.Query("UPDATE product SET nama_barang = ?, foto = ?, harga = ?, url = ? WHERE id = ?",p.NamaBarang, p.Foto, p.Harga, p.Url, id)
 }
