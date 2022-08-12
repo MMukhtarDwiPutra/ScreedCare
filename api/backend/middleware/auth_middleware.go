@@ -4,7 +4,6 @@ import(
 	"net/http"
 	"ScreedCare/model"
 	"encoding/json"
-	"fmt"
 )
 
 func AuthMiddleware(w http.ResponseWriter, r *http.Request) bool{
