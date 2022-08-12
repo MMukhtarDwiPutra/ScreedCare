@@ -5,6 +5,8 @@ import(
 	"ScreedCare/backend/controller"
 	"ScreedCare/backend/service"
 	"ScreedCare/backend/repository"
+	"ScreedCare/backend/exception"
+	"ScreedCare/backend/middleware"
 	// "ScreedCare/backend/handler"
 	"path/filepath"
 	"net/http"
@@ -31,4 +33,7 @@ func AddRouter(router *mux.Router){
 	// router.PathPrefix("/static/css/").Handler(http.StripPrefix("/static/css/", http.FileServer(http.Dir(filepath.Join("assets", "css")))))
 	router.PathPrefix("/static/img/").Handler(http.StripPrefix("/static/img/", http.FileServer(http.Dir(filepath.Join("file", "img")))))
 	// router.PathPrefix("/static/js/").Handler(http.StripPrefix("/static/js/", http.FileServer(http.Dir(filepath.Join("assets", "js")))))
+
+	router.Use(exception.ErrorHandler)
+	router.Use(middleware.EnableCORS)
 }

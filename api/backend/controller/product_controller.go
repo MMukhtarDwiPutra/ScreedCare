@@ -23,7 +23,6 @@ func (c *productController) GetAllProduct(w http.ResponseWriter, r *http.Request
 
 	byteData, _ := json.Marshal(&products)
 	w.Header().Add("Content-type", "application/json")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Write(byteData)
 }
 
