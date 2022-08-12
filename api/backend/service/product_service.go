@@ -3,6 +3,8 @@ package service
 import (
 	"ScreedCare/model"
 	"ScreedCare/backend/repository"
+	"golang.org/x/text/language"
+	"golang.org/x/text/message"
 )
 
 type ProductService interface{
@@ -11,6 +13,7 @@ type ProductService interface{
  	DeleteProduct(id int) model.ProductResponse
  	FindProduct(id int) model.ProductResponse
  	UpdateProduct(p model.ProductRequest, id int)
+ 	AddManyProduct(p model.ProductData)
 }
 
 type productService struct{
@@ -22,7 +25,18 @@ func NewProductService(repository repository.ProductRepository) *productService{
 }
 
 func (s *productService) GetAllProduct() []model.ProductResponse{
-	return s.repository.GetAllProduct()
+	products := s.repository.GetAllProduct()
+	p := message.NewPrinter(language.English)
+	for i := 0; i < len(products); i++{
+		products[i].HargaStr = p.Sprintf("%d",products[i].Harga)
+	}
+	return products
+}
+
+func (s *productService) AddManyProduct(p model.ProductData){
+	for i := 0; i < len(p.Data); i++{
+		s.repository.AddProduct(p.Data[i])
+	}
 }
 
 func (s *productService) AddProduct(p model.ProductRequest) {
@@ -37,7 +51,10 @@ func (s *productService) DeleteProduct(id int) model.ProductResponse{
 }
 
 func (s *productService) FindProduct(id int) model.ProductResponse{
-	return s.repository.FindProduct(id)
+	product := s.repository.FindProduct(id)
+	p := message.NewPrinter(language.English)
+	product.HargaStr = p.Sprintf("%d",product.Harga)
+	return product
 }
 
 func (s *productService) UpdateProduct(p model.ProductRequest, id int){
