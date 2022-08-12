@@ -1,17 +1,27 @@
-import React from "react";
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 
-const Cardbody = (props) => {
+function Cardbody(props) {
   return (
-    <section className="home" id="home">
-      <div className="container">
-        <div className="box">
-          <img src={props.image} />
-          <h5>{props.namabarang} </h5>
-          <h6>Rp. {props.hargabarang}</h6>
-        </div>
-      </div>
-    </section>
+    <Card style={{ width: '18rem' }}>
+      <Card.Img variant="top" src={props.image}  />
+      <Card.Body>
+        <Card.Title>{props.namabarang}</Card.Title>
+        <Card.Text>
+          Some quick example text to build on the card title and make up the
+          bulk of the card's content.
+        </Card.Text>
+      </Card.Body>
+      <ListGroup className="list-group-flush">
+        <ListGroup.Item>{props.hargabarang}</ListGroup.Item>
+        <ListGroup.Item>4/5****</ListGroup.Item>
+      </ListGroup>
+      <Card.Body>
+        <Card.Link href="#">Card Link</Card.Link>
+        <Card.Link href="#">Another Link</Card.Link>
+      </Card.Body>
+    </Card>
   );
-};
+}
 
 export default Cardbody;

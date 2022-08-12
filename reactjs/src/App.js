@@ -1,12 +1,11 @@
-import logo from "./logo.svg";
-import "./App.css";
-import Navbar from "./components/Navbar";
-import Maincontent from "./components/Maincontent";
+
+import Navigation from "./components/Navigation.js";
+import Maincontent from "./components/Maincontent.js";
 
 function App() {
   return (
     <>
-      <Navbar />;
+      <Navigation />;
       <Maincontent />;
     </>
   );

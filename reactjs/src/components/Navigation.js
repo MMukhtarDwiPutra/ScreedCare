@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./Styleabout.css";
 function Navbar() {
   return (
     <div>
