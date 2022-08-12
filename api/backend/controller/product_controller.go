@@ -23,6 +23,20 @@ func (c *productController) GetAllProduct(w http.ResponseWriter, r *http.Request
 
 	byteData, _ := json.Marshal(&products)
 	w.Header().Add("Content-type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Write(byteData)
+}
+
+func (c *productController) AddManyProduct(w http.ResponseWriter, r *http.Request){
+	product := model.ProductData{}
+	dec := json.NewDecoder(r.Body)
+	err := dec.Decode(&product)
+	helper.PanicIfError(err)
+
+	c.service.AddManyProduct(product)
+
+	byteData, _ := json.Marshal(&product)
+	w.Header().Add("Content-type", "application/json")
 	w.Write(byteData)
 }
 
@@ -32,6 +46,7 @@ func (c *productController) AddProduct(w http.ResponseWriter, r *http.Request) {
 	helper.PanicIfError(err)
 
 	c.service.AddProduct(product)
+	
 
 	byteData, _ := json.Marshal(&product)
 	w.Header().Add("Content-type", "application/json")
@@ -59,6 +74,7 @@ func (c *productController) GetProduct(w http.ResponseWriter, r *http.Request){
 
 	byteData, _ := json.Marshal(&product)
 	w.Header().Add("Content-type", "application/json")
+	w.Header().Add("Access-Control-Allow-Origin", "http://localhost:8080")
 	w.Write(byteData)
 }
 
@@ -73,7 +89,8 @@ func (c *productController) UpdateProduct(w http.ResponseWriter, r *http.Request
 
 	c.service.UpdateProduct(product, id)
 
-	byteData, _ := json.Marshal(&product)
+	productResponse := c.service.FindProduct(id)
+	byteData, _ := json.Marshal(&productResponse)
 	w.Header().Add("Content-type", "application/json")
 	w.Write(byteData)
 }

@@ -7,7 +7,7 @@ const Cardbody = (props) => {
         <div className="box">
           <img src={props.image} />
           <h5>{props.namabarang} </h5>
-          <h6>{props.hargabarang}</h6>
+          <h6>Rp. {props.hargabarang}</h6>
         </div>
       </div>
     </section>
