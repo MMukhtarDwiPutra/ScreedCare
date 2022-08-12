@@ -95,7 +95,7 @@ section {
   padding: 100px 8%;
 }
 
-.container {
+/*.container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, auto));
   align-items: center;
@@ -103,7 +103,7 @@ section {
   text-align: center;
   cursor: pointer;
   padding-top: 2rem;
-}
+}*/
 
 .box {
   padding: 10px 20px 10px 20px;
