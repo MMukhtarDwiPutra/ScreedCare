@@ -5,6 +5,8 @@ import (
 	"ScreedCare/backend/repository"
 	"golang.org/x/text/language"
 	"golang.org/x/text/message"
+	"ScreedCare/backend/exception"
+	"fmt"
 )
 
 type ProductService interface{
@@ -44,7 +46,7 @@ func (s *productService) AddProduct(p model.ProductRequest) {
 }
 
 func (s *productService) DeleteProduct(id int) model.ProductResponse{
-	product := s.repository.FindProduct(id)
+	product := s.FindProduct(id)
 
 	s.repository.DeleteProduct(id)
 	return product
@@ -52,11 +54,17 @@ func (s *productService) DeleteProduct(id int) model.ProductResponse{
 
 func (s *productService) FindProduct(id int) model.ProductResponse{
 	product := s.repository.FindProduct(id)
+
+	if (product == model.ProductResponse{}){
+		panic(exception.NewNotFoundError(fmt.Sprintf("Data product with id %d not found",id)))
+	}
+
 	p := message.NewPrinter(language.English)
 	product.HargaStr = p.Sprintf("%d",product.Harga)
 	return product
 }
 
 func (s *productService) UpdateProduct(p model.ProductRequest, id int){
+	s.FindProduct(id)
 	s.repository.UpdateProduct(p, id)
 }
