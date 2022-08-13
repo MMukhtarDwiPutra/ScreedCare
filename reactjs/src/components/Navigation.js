@@ -1,13 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Styleabout.css";
-function Navbar() {
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+
+function Navigation() {
+  const [isOpen = false, setIsOpen] = useState(false);
+  const handleClick = () => {
+    if (isOpen == false){
+      setIsOpen(!isOpen);
+    }else{
+      setIsOpen(!isOpen);
+    }
+  }
+
   return (
     <div>
       <header>
         <a href="#" className="logo">
           screedCare
         </a>
-        <div className="bx bx-menu" id="menu-icon"></div>
+
+        <div className="bx bx-menu" id="menu-icon" onClick={handleClick}>
+        </div>
+        {isOpen && (
+        <div class="dropdown-content">
+          <ul>
+            <li>
+              <a href="#home">HOME</a>
+            </li>
+            <li>
+              <a href="#about">ABOUT US</a>
+            </li>
+            <li>
+              <a href="#contact">CONTACT</a>
+            </li>
+            <li>
+              <a href="#blog">BLOG</a>
+            </li>
+          </ul>
+        </div>
+        )}
         <ul className="navbar">
           <li>
             <a href="#home">HOME</a>
@@ -33,4 +65,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default Navigation;

@@ -5,9 +5,9 @@ import Body from "./Body";
 const Maincontent = () => {
   return (
     <>
-      <Body />;
-      <About />;
-      <Footer />;
+      <Body />
+      <About />
+      <Footer />
     </>
   );
 };

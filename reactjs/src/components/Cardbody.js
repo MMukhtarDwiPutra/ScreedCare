@@ -21,7 +21,7 @@ function Cardbody(props) {
         <Card.Link href="#">Another Link</Card.Link>
       </Card.Body>
     </Card>
-  );
+  )
 }
 
 export default Cardbody;
