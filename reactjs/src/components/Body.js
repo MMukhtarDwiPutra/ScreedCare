@@ -18,9 +18,11 @@ const Body = () => {
         <div className="col-12 text-center mt-5">
           <h1>TOP Rekomendasi Masker</h1>
         </div>
-        <Row xs="auto">
+        <Row xs="auto" gy="5" className="justify-content-center">
           {items.map((item) => (
-            <Col my-5><Cardbody image={item.foto} namabarang={item.nama_barang} hargabarang={item.harga_str} /></Col>
+            <Col className="col-md-4 col-offset-5">
+              <Cardbody image={item.foto} namabarang={item.nama_barang} hargabarang={item.harga_str} />
+            </Col>
           ))}
         </Row>
       </div>
