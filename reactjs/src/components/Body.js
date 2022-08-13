@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 const Body = () => {
   const [items, setItem] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:8080/api/product/")
+    fetch("http://192.168.1.7:8080/api/product/")
       .then((res) => res.json())
       .then((result) => {
         setItem(result.data);
@@ -15,7 +15,7 @@ const Body = () => {
   return (
     <div>
       <div className="container">
-        <div className="col-12 text-center mt-5">
+        <div className="col-12 text-center" style={{marginTop: "150px"}}>
           <h1>TOP Rekomendasi Masker</h1>
         </div>
         <Row xs="auto">
@@ -25,7 +25,7 @@ const Body = () => {
         </Row>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default Body;

@@ -5,8 +5,8 @@ import Maincontent from "./components/Maincontent.js";
 function App() {
   return (
     <>
-      <Navigation />;
-      <Maincontent />;
+      <Navigation />
+      <Maincontent />
     </>
   );
 }
