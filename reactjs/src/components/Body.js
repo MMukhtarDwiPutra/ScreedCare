@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 const Body = () => {
   const [items, setItem] = useState([]);
   useEffect(() => {
-    fetch("http://192.168.1.7:8080/api/product/")
+    fetch(process.env.REACT_APP_SERVICE_URL+"/api/product/")
       .then((res) => res.json())
       .then((result) => {
         setItem(result.data);
@@ -21,7 +21,7 @@ const Body = () => {
         <Row xs="auto" gy="5" className="justify-content-center">
           {items.map((item) => (
             <Col className="col-md-4 col-offset-5">
-              <Cardbody image={item.foto} namabarang={item.nama_barang} hargabarang={item.harga_str} />
+              <Cardbody image={item.foto.includes("http") ? item.foto : process.env.REACT_APP_SERVICE_URL+"/static/img/"+item.foto} namabarang={item.nama_barang} hargabarang={item.harga_str} />
             </Col>
           ))}
         </Row>
